@@ -5,9 +5,12 @@ class MP3Importer
     end
 
     def files
-     
-        #binding.pry
-
+     @files = Dir.entries(@path)
+      @files.delete_if {|file| file == "." || file == ".."}
     end
 
+    def import
+    files.each {|song| Song.new_by_filename(song)}
+    end
 end
+
